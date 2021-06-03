@@ -1,4 +1,20 @@
-.task{
-    display: flex;
-    flex-direction: column;
+.task {
+    width: 100%;
+    overflow-wrap: break-word;
+}
+.task-box {
+    width: 100%;
+    border: 5px orange solid;
+    text-align: center;
+    margin: auto;
+    overflow-wrap: break-word;
+    margin-top: 5px;
+}
+.row {
+    width: 80%;
+    margin: auto    ;
+}
+.col {
+    width: 100%;
+
 }

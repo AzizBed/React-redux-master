@@ -1,31 +1,68 @@
 import React, { useState } from "react";
-import taskReducer from "../../Redux/Reducers/taskReducer";
 import { Button, Row, Col, Toast } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./Task.css";
+import EditTask from "../EditTask/EditTask";
+import { useDispatch } from "react-redux";
+import { completeTask } from "../../Redux/actions";
 
 function Task({ task, index }) {
     const [showA, setShowA] = useState(true);
-    const [showB, setShowB] = useState(true);
 
     const toggleShowA = () => setShowA(!showA);
-    const toggleShowB = () => setShowB(!showB);
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        dispatch(completeTask({ id: task.id, isDone: !task.isDone }));
+    };
+
     return (
-        <div className="task">
+        <div classNam="tak-container">
             <Row>
-                <Col xs={6}>
-                    <Toast show={showA} onClose={toggleShowA}>
-                        <Toast.Header style={{ textAlign: "center" }}>
+                <Col>
+                    <Toast className="task-box" show={showA} onClose={toggleShowA}>
+                        <Toast.Header>
                             <img
-                                src="https://image.flaticon.com/icons/png/128/721/721532.png"
+                                src={
+                                    "https://image.flaticon.com/icons/png/128/721/721532.png"
+                                }
                                 className="rounded me-2"
                                 width="20px"
                                 alt=""
                             />
-                            <h4 className="me-auto">
-                                Task <span>{index + 1} </span>
-                            </h4>
+                            <strong className="mr-auto">
+                                Task <span>{index + 1}</span>
+                            </strong>
+                            <small></small>
+                            <Button
+                                variant={
+                                    task.isDone
+                                        ? "outline-danger"
+                                        : "outline-success"
+                                }
+                                onClick={handleClick}
+                            >
+                                <img
+                                    src={
+                                        task.isDone
+                                            ? "https://static.thenounproject.com/png/1022925-200.png"
+                                            : "https://freeiconshop.com/wp-content/uploads/edd/task-done-outline.png"
+                                    }
+                                    alt="done"
+                                    width="20px"
+                                />
+                                {task.isDone ? "Undo" : "Done"}
+                            </Button>
+                            <EditTask task={task} />
                         </Toast.Header>
-                        <Toast.Body>{task.description}</Toast.Body>
+                        <Toast.Body
+                            style={{
+                                textDecoration: task.isDone
+                                    ? "line-through"
+                                    : "none",
+                            }}
+                        >
+                            {task.description}
+                        </Toast.Body>
                     </Toast>
                 </Col>
             </Row>
