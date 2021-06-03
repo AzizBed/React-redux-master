@@ -21,7 +21,7 @@ function Addtask() {
             <InputGroup
                 size="lg"
             >
-                <FormControl onChange={handleChange} value={newTask} />
+                <FormControl onChange={handleChange} value={newTask} placeholder="add new task..."  />
                 <Button type="reset" onClick={handleSubmit}>
                     Add
                 </Button>
