@@ -14,21 +14,28 @@ function Addtask() {
         dispatch(addTask({ description: newTask }));
         setNewTask("");
     };
-    
+    const Enter = (event) => {
+        if (event.key === "Enter") {
+            handleSubmit();
+        }
+    };
+
     return (
         <div className="addTask-box">
             <h1>Add a new task !</h1>
-            <InputGroup
-                size="lg"
-            >
-                <FormControl onChange={handleChange} value={newTask} placeholder="add new task..."  />
+            <InputGroup size="lg">
+                <FormControl
+                    type="text"
+                    onChange={handleChange}
+                    onKeyDown={(e) => Enter(e)}
+                    value={newTask}
+                    placeholder="add new task..."
+                />
                 <Button type="reset" onClick={handleSubmit}>
                     Add
                 </Button>
             </InputGroup>
-            <div className="addTask">
-                
-            </div>
+            <div className="addTask"></div>
         </div>
     );
 }
