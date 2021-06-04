@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Button, Row, Col, Toast } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Task.css";
@@ -14,7 +14,19 @@ function Task({ task, index }) {
     const handleClick = () => {
         dispatch(completeTask({ id: task.id, isDone: !task.isDone }));
     };
+    const [currentDate, setCurrentDate] = useState('');
 
+    useEffect(() => {
+      
+    
+      var hours = new Date().getHours(); //Current Hours
+      var min = new Date().getMinutes(); //Current Minutes
+      var sec = new Date().getSeconds(); //Current Seconds
+      setCurrentDate(
+         hours + ':' + min + ':' + sec
+      );
+    }, []);
+    console.log(currentDate);
     return (
         <div classNam="tak-container">
             <Row>
@@ -32,7 +44,7 @@ function Task({ task, index }) {
                             <strong className="mr-auto">
                                 Task <span>{index + 1}</span>
                             </strong>
-                            <small></small>
+                            <small style={{marginRight:'10px'}}>{currentDate} </small>
                             <Button
                                 variant={
                                     task.isDone
@@ -63,6 +75,7 @@ function Task({ task, index }) {
                         >
                             {task.description}
                         </Toast.Body>
+                            
                     </Toast>
                 </Col>
             </Row>

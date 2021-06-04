@@ -19,7 +19,6 @@ function Addtask() {
             handleSubmit();
         }
     };
-
     return (
         <div className="addTask-box">
             <h1>Add a new task !</h1>
