@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Row, Col, Toast } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Task.css";
@@ -14,25 +14,25 @@ function Task({ task, index }) {
     const handleClick = () => {
         dispatch(completeTask({ id: task.id, isDone: !task.isDone }));
     };
-    const [currentDate, setCurrentDate] = useState('');
+    const [currentDate, setCurrentDate] = useState("");
 
     useEffect(() => {
-      
-    
-      var hours = new Date().getHours(); //Current Hours
-      var min = new Date().getMinutes(); //Current Minutes
-      var sec = new Date().getSeconds(); //Current Seconds
-      setCurrentDate(
-         hours + ':' + min + ':' + sec
-      );
+        var hours = new Date().getHours(); //Current Hours
+        var min = new Date().getMinutes(); //Current Minutes
+        var sec = new Date().getSeconds(); //Current Seconds
+        setCurrentDate(hours + ":" + min + ":" + sec);
     }, []);
     console.log(currentDate);
     return (
         <div classNam="tak-container">
             <Row>
                 <Col>
-                    <Toast className="task-box" show={showA} onClose={toggleShowA}>
-                        <Toast.Header>
+                    <Toast
+                        className="task-box"
+                        show={showA}
+                        onClose={toggleShowA}
+                    >
+                        <Toast.Header closeButton={false}>
                             <img
                                 src={
                                     "https://image.flaticon.com/icons/png/128/721/721532.png"
@@ -44,7 +44,9 @@ function Task({ task, index }) {
                             <strong className="mr-auto">
                                 Task <span>{index + 1}</span>
                             </strong>
-                            <small style={{marginRight:'10px'}}>{currentDate} </small>
+                            <small style={{ marginRight: "20px" }}>
+                                {currentDate}{" "}
+                            </small>
                             <Button
                                 variant={
                                     task.isDone
@@ -75,7 +77,6 @@ function Task({ task, index }) {
                         >
                             {task.description}
                         </Toast.Body>
-                            
                     </Toast>
                 </Col>
             </Row>
